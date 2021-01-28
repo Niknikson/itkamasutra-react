@@ -1,0 +1,25 @@
+.header{
+        grid-area: header;
+        background-color:white;  
+        grid-template: 1fr / 1fr minmax(auto,300px) minmax(auto,1100px) 1fr;
+        margin-top: 30px;
+}
+
+/* .headerLogo{
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color:red;
+        grid-column: 2/3;
+}
+
+.headerList{
+        display: grid;
+        grid-auto-flow: column;
+        justify-items:  center;
+        
+}
+
+.headerMenu{
+        grid-column: 3/4;
+} */

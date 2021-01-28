@@ -1,0 +1,26 @@
+.wrapper{
+  display: grid;
+  margin:  auto;
+  width: 1200px;
+  min-height: 100vh;
+  grid-template-columns: 1fr 9fr;
+  grid-template-rows: 100px 1fr;
+  grid-template-areas: 
+  'header header'
+  'nav content';
+  
+}
+
+.wrapper-content{
+  grid-area: content;
+  border: 1px solid grey;
+  border-radius: 10px;
+  background-color:white;
+  padding: 1em;
+  margin-top: 5px ;
+  margin-left: 5px ;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .3),
+            0 1px 4px rgba(0, 0, 0, .3),
+            23px 0 20px -23px rgba(0, 0, 0, .6),
+            inset 0 0 40px rgba(0, 0, 0, .1);
+}

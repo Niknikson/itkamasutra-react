@@ -1,46 +1,32 @@
 import React from 'react';
 import s from './MyPost.module.css';
 import Post from './Post/Post';
-
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import KeyboardVoiceIcon from '@material-ui/icons/KeyboardVoice';
-import Icon from '@material-ui/core/Icon';
-import SaveIcon from '@material-ui/icons/Save';
+import useStyles  from "./styles";
+import { addPostActionCreator, apDateNewPostActionCreator } from '../../../redux/state';
 
-const useStyles = makeStyles((theme) => ({
-    button: {
-        margin: theme.spacing(1),
-    },
-}));
+
 
 const MyPost = (props) => {
     const classes = useStyles();
-    // let postData = [
-    //     { id: 1, message: 'Hello', lickesCount: 23 },
-    //     { id: 2, message: 'How are you my freand', lickesCount: 49 },
-    // ];
-
+    
     let newPostElement = React.createRef();
+    let postElement = props.postData
+        .map((p) => <Post message={p.message} lickesCount={p.lickesCount} />)
+
+
 
     let addPost = () => {
         // let text = newPostElement.current.value;
-        props.addPosts();
+        props.dispatch(addPostActionCreator())
         // props.updateNewPostText("");
-
     }
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        props.dispatch(apDateNewPostActionCreator(text));};
 
-    };
-
-    let postElement = props.postData
-        .map((p) => <Post message={p.message} lickesCount={p.lickesCount} />)
-
+    
     return (
         <div className={s.myPost}>
             <div>My Post</div>

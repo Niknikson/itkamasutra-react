@@ -7,7 +7,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 const App = (props) => {
   return (
-    <BrowserRouter>
+    
       <div className="wrapper">
         <Header />
         <Nav />
@@ -23,11 +23,16 @@ const App = (props) => {
           />
           <Route
             path="/dialogs"
-            render={() => <Dialog dialogState={props.state.dialogState} />}
+            render={() => (
+              <Dialog
+                dialogState={props.state.dialogState}
+                dispatch={props.dispatch}
+              />
+            )}
           />
         </div>
       </div>
-    </BrowserRouter>
+    
   );
 };
 

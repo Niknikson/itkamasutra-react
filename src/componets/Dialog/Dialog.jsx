@@ -9,16 +9,16 @@ import { addMessageActionCreator, upDateNewMessageActionCreator } from '../../re
 
 const Dialog = (props) => {
     const classes = useStyles();
-    let dialogElement = props.dialogState.dialogsData.map((d) => <DialogItem name={d.name} id={d.id} />)
-    let messageElement = props.dialogState.messageData.map((m) => <Message message={m.message} />)
-    let newMessageText = props.dialogState.newMessageText
+    let dialogElement = props.dialogsData.map((d) => <DialogItem name={d.name} id={d.id} />)
+    let messageElement = props.messageData.map((m) => <Message message={m.message} />)
+    let newMessageText = props.newMessageText
 
     let addMessage = () => {
-        props.dispatch(addMessageActionCreator())
+        props.addMessage()
     }
     let onMessageChange = (e) => {
         let text = e.target.value;
-        props.dispatch(upDateNewMessageActionCreator(text));
+        props.onMessageChange(text)
     };
 
     return (

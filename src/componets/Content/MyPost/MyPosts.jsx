@@ -3,10 +3,10 @@ import s from './MyPost.module.css';
 import Post from './Post/Post';
 import Button from '@material-ui/core/Button';
 import useStyles  from "./styles";
-import { addPostActionCreator, apDateNewPostActionCreator } from '../../../redux/content-reducer';
 
 
 const MyPost = (props) => {
+   
     const classes = useStyles();
 
   let postElement = props.postData.map((p) => <Post message={p.message} lickesCount={p.lickesCount} />)
@@ -14,11 +14,13 @@ const MyPost = (props) => {
     let newPostElement = React.createRef()
 
     let addPost = () => {
-        props.dispatch(addPostActionCreator())  
+        props.addPost();
     }
+
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.dispatch(apDateNewPostActionCreator(text));}
+        props.upDateNewPostText(text);
+    }
 
     return (
         <div className={s.myPost}>

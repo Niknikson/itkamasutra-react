@@ -1,7 +1,16 @@
 const ADD_POST = "ADD-POST";
 const UP_DATE_NEW_POST_TEXT = "UPDATE-NEW-POST";
 
-const contentReducer = (state, action) => {
+let initialState = {
+      newPostText: ["hello"],
+      postData: [
+        { id: 1, message: "Hello", lickesCount: 23 },
+        { id: 2, message: "How are you my freand", lickesCount: 49 },
+      ],
+    }
+    
+
+const contentReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -28,7 +37,7 @@ export const addPostActionCreator = () => {
   };
 };
 
-export const apDateNewPostActionCreator = (text) => {
+export const upDateNewPostActionCreator = (text) => {
   return {
     type: UP_DATE_NEW_POST_TEXT,
     newText: text,

@@ -4,14 +4,16 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import Button from '@material-ui/core/Button';
 import useStyles from './styles'
-import { addMessageActionCreator, upDateNewMessageActionCreator } from '../../redux/dialog-reducer';
+
 
 
 const Dialog = (props) => {
+    
     const classes = useStyles();
-    let dialogElement = props.dialogsData.map((d) => <DialogItem name={d.name} id={d.id} />)
-    let messageElement = props.messageData.map((m) => <Message message={m.message} />)
-    let newMessageText = props.newMessageText
+    let state = props.dialogState
+    let dialogElement = state.dialogsData.map((d) => <DialogItem name={d.name} id={d.id} />)
+    let messageElement = state.messageData.map((m) => <Message message={m.message} />)
+    let newMessageText = state.newMessageText
 
     let addMessage = () => {
         props.addMessage()

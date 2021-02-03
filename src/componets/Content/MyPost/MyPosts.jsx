@@ -7,9 +7,9 @@ import useStyles  from "./styles";
 
 const MyPost = (props) => {
    
-    const classes = useStyles();
+    const classes = useStyles()
 
-  let postElement = props.postData.map((p) => <Post message={p.message} lickesCount={p.lickesCount} />)
+    let postElement = props.postData.map((p) => <Post message={p.message} lickesCount={p.lickesCount} />)
 
     let newPostElement = React.createRef()
 
@@ -19,7 +19,7 @@ const MyPost = (props) => {
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.upDateNewPostText(text);
+        props.onPostChange(text);
     }
 
     return (

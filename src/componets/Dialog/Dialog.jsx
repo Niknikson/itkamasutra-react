@@ -11,8 +11,8 @@ const Dialog = (props) => {
     
     const classes = useStyles();
     let state = props.dialogState
-    let dialogElement = state.dialogsData.map((d) => <DialogItem name={d.name} id={d.id} />)
-    let messageElement = state.messageData.map((m) => <Message message={m.message} />)
+    let dialogElement = state.dialogsData.map((d) => <DialogItem name={d.name} key={d.id} id={d.id} />)
+    let messageElement = state.messageData.map((m) => <Message message={m.message} key={m.id} />)
     let newMessageText = state.newMessageText
 
     let addMessage = () => {

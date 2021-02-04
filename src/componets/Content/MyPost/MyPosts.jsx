@@ -9,7 +9,7 @@ const MyPost = (props) => {
    
     const classes = useStyles()
 
-    let postElement = props.postData.map((p) => <Post message={p.message} lickesCount={p.lickesCount} />)
+    let postElement = props.postData.map((p) => <Post message={p.message} key={p.id} lickesCount={p.lickesCount} />)
 
     let newPostElement = React.createRef()
 

@@ -16,17 +16,17 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return {
             getUsers: (users) => {
-                dispatch(getUsersAC(users))
+             dispatch(getUsersAC(users))
             },
              followed: (userId) => {
-                    dispatch(followAC(userId))
-                },
-             unfollowed: (userId) => {
-                        dispatch(unfollowAC(userId))
-                    },
+             dispatch(followAC(userId))
+             },
             setCurrenPage: (page) => {
-                            dispatch(currentPageAC(page))
-                        }
+             dispatch(currentPageAC(page))
+             },
+            // setTotalCount: (totalUsers) => {
+            // dispatch(setTotalCountAC(totalUsers))
+            //  },
     }
 }
 

@@ -1,17 +1,8 @@
 import React from "react";
 import s from './Users.module.css'
-import { Avatar, Button } from '@material-ui/core'
+import { Avatar, } from '@material-ui/core'
 import * as axios from 'axios'
-// import Pagination from '@material-ui/lab/Pagination'
-// //import useStyles from "./styles"
-//  import { withStyles } from "@material-ui/core/styles"
-// const styles = ((theme) => ({
-//     root: {
-//         '& > *': {
-//             marginTop: theme.spacing(2),
-//         },
-//     },
-// }));
+
 
 
 class Users extends React.Component {
@@ -51,13 +42,12 @@ class Users extends React.Component {
 
             {
                 this.props.users.map(u => <div key={u.id}>
-
                     <span>
                         <div ><Avatar>H</Avatar></div>
                         <div>
                             {u.followed
-                                ? <Button onClick={() => { this.props.followed(u.id) }} >unFollow</Button>
-                                : <Button onClick={() => { this.props.followed(u.id) }}>Follow</Button>}
+                                ? <button onClick={() => { this.props.followed(u.id) }} >unFollow</button>
+                                : <button onClick={() => { this.props.followed(u.id) }}>Follow</button>}
                         </div>
                     </span>
                     <span>

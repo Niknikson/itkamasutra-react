@@ -2,11 +2,13 @@ const FOLLOW = "FOLLOW";
 const UN_FOLLOW = "UN-FOLLOW";
 const GET_USERS = "GET-USERS";
 const SET_CURRENT_PAGE = 'SET-USERS'
+// const SET_TOTAL_USERS_COUNT = "SET-TOTAL-COUNT";
+
 
 let initialState = {
   users: [],
   pageSize: 5,
-  totalUsersCount: 21,
+  totalUsersCount: 30,
   currenPage: 1,
 };
 
@@ -21,13 +23,13 @@ const usersReducer = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        users: state.users.map((u) => {
+        users: state.users.map(  (u) => {
           if (u.id === action.userId) {
-            return { ...u, followed: true };
+            return { ...u, followed: !u.followed };
           }
           return u;
-        }),
-      };
+        })
+      }
 
     case SET_CURRENT_PAGE:
       return {
@@ -35,16 +37,12 @@ const usersReducer = (state = initialState, action) => {
         currenPage: action.page,
       };
 
-    case UN_FOLLOW:
-      return {
-        ...state,
-        users: state.users.map((u) => {
-          if (u.id === action.userId) {
-            return { ...u, followed: false };
-          }
-          return u;
-        }),
-      };
+    // case SET_TOTAL_USERS_COUNT:
+    //   return {
+    //     ...state,
+    //     totalUsersCount: action.totalCount,
+    //   };
+
 
     default:
       return state;
@@ -65,12 +63,12 @@ export const followAC = (userId) => {
   }
 }
 
-export const unfollowAC = (userId) => {
-  return {
-    type: UN_FOLLOW,
-    userId,
-  };
-};
+// export const setTotalCountAC = (totalCount) => {
+//   return {
+//     type: SET_TOTAL_USERS_COUNT,
+//     totalCount,
+//   };
+// };
 
 export const currentPageAC = (page) => {
   return {
@@ -78,5 +76,8 @@ export const currentPageAC = (page) => {
     page,
   };
 };
+
+
+
 
 export default usersReducer;

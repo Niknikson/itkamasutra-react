@@ -2,7 +2,8 @@ const FOLLOW = "FOLLOW";
 const UN_FOLLOW = "UN-FOLLOW";
 const GET_USERS = "GET-USERS";
 const SET_CURRENT_PAGE = 'SET-USERS'
-// const SET_TOTAL_USERS_COUNT = "SET-TOTAL-COUNT";
+// const SET_TOTAL_USERS_COUNT = "SET-TOTAL-COUNT"
+const TOGGLE_ISFETH = 'TOGGLE-ISFETCH'
 
 
 let initialState = {
@@ -10,6 +11,7 @@ let initialState = {
   pageSize: 5,
   totalUsersCount: 30,
   currenPage: 1,
+  isFetching: false,
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -17,24 +19,30 @@ const usersReducer = (state = initialState, action) => {
     case GET_USERS:
       return {
         ...state,
-        users:  action.users ,
+        users: action.users,
       };
 
     case FOLLOW:
       return {
         ...state,
-        users: state.users.map(  (u) => {
+        users: state.users.map((u) => {
           if (u.id === action.userId) {
             return { ...u, followed: !u.followed };
           }
           return u;
-        })
-      }
+        }),
+      };
 
     case SET_CURRENT_PAGE:
       return {
         ...state,
         currenPage: action.page,
+      };
+
+    case TOGGLE_ISFETH:
+      return {
+        ...state,
+        isFetching: action.isFetcing,
       };
 
     // case SET_TOTAL_USERS_COUNT:
@@ -43,25 +51,32 @@ const usersReducer = (state = initialState, action) => {
     //     totalUsersCount: action.totalCount,
     //   };
 
-
     default:
       return state;
   }
 }
 
-export const getUsersAC = (users) => {
+export const getUsers = (users) => {
   return {
     type: GET_USERS,
     users,
-  }
-}
+  };
+};
 
-export const followAC = (userId) => {
+export const followed = (userId) => {
   return {
     type: FOLLOW,
     userId,
-  }
-}
+  };
+};
+
+export const isFethcing = (isFetcing) => {
+  return {
+    type: TOGGLE_ISFETH,
+    isFetcing,
+  };
+};
+
 
 // export const setTotalCountAC = (totalCount) => {
 //   return {
@@ -70,7 +85,7 @@ export const followAC = (userId) => {
 //   };
 // };
 
-export const currentPageAC = (page) => {
+export const setCurrenPage = (page) => {
   return {
     type: SET_CURRENT_PAGE,
     page,

@@ -11,30 +11,14 @@ let initialState = {
 
 const contentReducer = (state = initialState, action) => {
 
-
-
   switch (action.type) {
-
-
     case UP_DATE_NEW_POST_TEXT:
-      //stateCopy.newPostText = action.newText
-      
       return {
         ...state,
         newPostText: action.newText
       }
-      
     case ADD_POST:
-      // let newPost = {
-      //   id: 3,
-      //   message: stateCopy.newPostText,
-      //   lickesCount: 0,
-      // }
-      // stateCopy.postData = [...state.postData];
-      // stateCopy.postData.push(newPost);
-      // stateCopy.newPostText = "";
      let newText = state.newPostText;
-     
       return {
         ...state,
         newPostText: "",
@@ -42,12 +26,12 @@ const contentReducer = (state = initialState, action) => {
           ...state.postData,
           { id: 3, message: newText, lickesCount: 100 },
         ],
-      };
-
+      }
+    
     default:
       return state;
   }
-};
+}
 
 export const addPostActionCreator = () => {
   return {

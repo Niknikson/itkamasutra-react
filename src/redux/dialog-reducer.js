@@ -21,19 +21,11 @@ const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case UP_DATE_NEW_MESSAGE:
-      //stateCopy.newMessageText = action.newMText;
       return {
         ...state,
         newMessageText: action.newMText,
       }
-
     case ADD_MESSAGE:
-      // let newMessage = {
-      //   id: 5,
-      //   message: stateCopy.newMessageText,
-      // }
-      //   stateCopy.messageData.push(newMessage);
-      //   stateCopy.newMessageText = "";
       let newMText = state.newMessageText
       return{
         ...state,
@@ -60,18 +52,3 @@ export const upDateNewMessageActionCreator = (text) => {
 
 
 export default dialogsReducer;
-
-
-
-
-
-
-
-// if (action.type === "ADD-MESSAGE") {
-//     let newMessage = state.newMessageText
-//       state.newMessageText = "";
-//   state.messageData.push({ id: 6, message: newMText });
-
-// } else if (action.type === "UP-DATE-NEW-MESSAG") {
-//   state.newMessageText = action.newMText;
-// }

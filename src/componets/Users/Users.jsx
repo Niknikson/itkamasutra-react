@@ -1,8 +1,7 @@
 import React from "react";
 import s from './Users.module.css'
-import { Avatar, } from '@material-ui/core'
+import { Avatar, Button } from '@material-ui/core'
 import * as axios from 'axios'
-
 
 
 class Users extends React.Component {
@@ -29,7 +28,7 @@ class Users extends React.Component {
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
-       
+      
         return <div>
 
             <div>
@@ -42,6 +41,7 @@ class Users extends React.Component {
 
             {
                 this.props.users.map(u => <div key={u.id}>
+
                     <span>
                         <div ><Avatar>H</Avatar></div>
                         <div>

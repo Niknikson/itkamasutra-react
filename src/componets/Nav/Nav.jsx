@@ -6,7 +6,7 @@ const Nav = (props) => {
     return (
         <div className={s.nav}>
             <div className={s.container}>
-                <NavLink to='/content'>Profile</NavLink>
+                <NavLink to='/profile/'>Profile</NavLink>
             </div>
             <div>
                 <NavLink to='/dialogs'>Dialogs</NavLink>

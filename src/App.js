@@ -1,18 +1,18 @@
 import "./App.css";
-import Header from "./componets/Header/Header";
 import Nav from "./componets/Nav/Nav";
-import Content from "./componets/Content/Content";
+import ContentContauner from "./componets/Content/ContentContauner";
 import DialogContainer from "./componets/Dialog/DialogContainer";
 import {  Route } from "react-router-dom";
 import UsersContainer from "./componets/Users/UsersContainer";
+import HeaderContainer from "./componets/Header/HeaderContainer";
 
 const App = (props) => {
   return (
     <div className="wrapper">
-      <Header />
+      <HeaderContainer />
       <Nav />
       <div className="wrapper-content">
-        <Route path="/content" render={() => <Content />} />
+        <Route path="/profile/:userId?" render={() => <ContentContauner />} />
         <Route path="/dialogs" render={() => <DialogContainer />} />
         <Route path="/users" render={() => <UsersContainer />} />
       </div>

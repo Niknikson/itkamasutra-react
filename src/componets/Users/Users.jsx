@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './Users.module.css'
 import {Avatar,} from '@material-ui/core'
-
+import { NavLink } from 'react-router-dom';
 
 let  Users = (props) => {
 
@@ -23,7 +23,11 @@ let  Users = (props) => {
             { props.users.map(u => <div key={u.id}>
 
                     <span>
-                        <div ><Avatar>H</Avatar></div>
+                        <div>
+                            <NavLink  to={'/profile/'+u.id}>
+                            <Avatar  src={u.photos.small }/>
+                            </NavLink>
+                        </div>
                         <div>
                             {u.followed
                                 ? <button onClick={() => { props.followed(u.id) }} >unFollow</button>

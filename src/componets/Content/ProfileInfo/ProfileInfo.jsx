@@ -1,10 +1,15 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
+import Prelouder from '../../../componets/Prelouder/Prelouder'
 
 const ProfileInfo = (props) => {
+
+    if(!props.profile){
+        return <Prelouder/>
+    }
     return (
-        <div className={s.img}>
-            <img className={s.img}  />
+        <div >
+            <img src={props.profile.photos.large}   />
         </div>
 
     );

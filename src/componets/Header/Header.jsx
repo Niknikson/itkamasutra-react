@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
 
   return (
@@ -35,9 +35,12 @@ const Header = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+              News
           </Typography>
-          <Button color="inherit">Login</Button>
+            <div>
+              {props.isAuth ? props.login :
+                <Button color="inherit">Login</Button>}
+            </div>
         </Toolbar>
       </AppBar>
       </div>

@@ -1,46 +1,43 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUsers, followed,setCurrenPage, isFethcing } from '../../redux/users-reducer'
-import * as axios from 'axios'
+import { getUsers, followed, setCurrenPage, isFethcing } from '../../redux/users-reducer'
 import Users from './Users'
 import Prelouder from '../../componets/Prelouder/Prelouder'
-
+import { getUsersApi, resUsersApi } from '../../api/api'
 
 class UsersAC extends React.Component {
 
     componentDidMount() {
         this.props.isFethcing(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currenPage}&counnt=${this.props.pageSize}`)
-            .then(response => {
-                this.props.isFethcing(false)
-                this.props.getUsers(response.data.items)
-               
-            })
 
-    }
-     
-    onPageChange = (pageNuber) => {
-        this.props.setCurrenPage(pageNuber)
-        this.props.isFethcing(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNuber}&counnt=${this.props.pageSize}`).then(response => {
+        getUsersApi(this.props.currenPage, this.props.pageSize).then(response => {
             this.props.isFethcing(false)
-            this.props.getUsers(response.data.items)
+            this.props.getUsers(response.items)
         })
     }
 
-    
+    onPageChange = (pageNuber) => {
+        this.props.setCurrenPage(pageNuber)
+        this.props.isFethcing(true)
+        resUsersApi(pageNuber, this.props.pageSize).then(response => {
+            this.props.isFethcing(false)
+            this.props.getUsers(response.items)
+        })
+    }
+
+
     render() {
         return <>
-        {this.props.isFetching?<Prelouder /> : null}
-        <Users 
-        totalUsersCount={this.props.totalUsersCount}
-        pageSize={this.props.pageSize}
-        currenPage={this.props.currenPage}
-        users={this.props.users}
-        followed={this.props.followed}
-        onPageChange={this.onPageChange}
-        
-        />
+            {this.props.isFetching ? <Prelouder /> : null}
+            <Users
+                totalUsersCount={this.props.totalUsersCount}
+                pageSize={this.props.pageSize}
+                currenPage={this.props.currenPage}
+                users={this.props.users}
+                followed={this.props.followed}
+                onPageChange={this.onPageChange}
+
+            />
         </>
     }
 }
@@ -75,12 +72,13 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
- export default  connect(mapStateToProps, 
-           {getUsers,
-             followed,
-            setCurrenPage,
-             isFethcing,
-             })(UsersAC)
+export default connect(mapStateToProps,
+    {
+        getUsers,
+        followed,
+        setCurrenPage,
+        isFethcing,
+    })(UsersAC)
 
 
 

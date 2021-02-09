@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,8 @@ const Header = (props) => {
           </Typography>
             <div>
               {props.isAuth ? props.login :
-                <Button color="inherit">Login</Button>}
+                <Button color="inherit">
+                  </Button>}
             </div>
         </Toolbar>
       </AppBar>

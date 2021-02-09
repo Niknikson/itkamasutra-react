@@ -22,6 +22,3 @@ import { Provider } from 'react-redux';
 
 
 
-
-// rerenderEntireTree();
-//store.subscribe(rerenderEntireTree);

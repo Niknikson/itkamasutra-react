@@ -12,6 +12,7 @@ class ContentContauner extends React.Component {
         if (!userId) {
            return userId = 2;
         }
+        
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(response => {
                 this.props.getUserProfile(response.data)

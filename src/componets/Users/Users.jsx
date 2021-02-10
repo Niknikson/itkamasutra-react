@@ -2,12 +2,11 @@ import React from 'react'
 import s from './Users.module.css'
 import {Avatar,} from '@material-ui/core'
 import { NavLink } from 'react-router-dom';
-import * as axios from 'axios'
 import { unfollowedApi, followedApi } from '../../api/api';
 
 
 let  Users = (props) => {
-
+debugger
  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
         let pages = []
         for (let i = 1; i <= pagesCount; i++) {
@@ -33,22 +32,25 @@ let  Users = (props) => {
                         </div>
                         <div>
                             {u.followed
-                            ? <button onClick={() => {
-
+                            ? <button disabled={props.disabelFollow.some(id => id === u.id)} onClick={() => {
+                                props.disabelFollowAc(true, u.id) 
                                 unfollowedApi(u.id).then(data => {
                                         if (data.resultCode === 0) {
                                             props.followed(u.id)
-                                        }
+                                    }
+                                    props.disabelFollowAc(false, u.id) 
                                     })
-
-                                
+                               
                             }} >unFollow</button>
-                            : <button onClick={() => {
+                            : <button disabled={props.disabelFollow.some(id => id === u.id)} onClick={() => {
+                                props.disabelFollowAc(true, u.id)
                                 followedApi(u.id).then(data => {
                                     if (data.resultCode === 0) {
                                         props.followed(u.id)
                                     }
+                                    props.disabelFollowAc(false, u.id)
                                 })
+                                
                             }}>Follow</button>}
                         </div>
                     </span>

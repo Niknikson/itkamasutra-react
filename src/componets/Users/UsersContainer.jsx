@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUsers, followed, setCurrenPage, isFethcing } from '../../redux/users-reducer'
+import { getUsers, followed, setCurrenPage, isFethcing, disabelFollowAc } from '../../redux/users-reducer'
 import Users from './Users'
 import Prelouder from '../../componets/Prelouder/Prelouder'
 import { getUsersApi, resUsersApi } from '../../api/api'
@@ -36,6 +36,8 @@ class UsersAC extends React.Component {
                 users={this.props.users}
                 followed={this.props.followed}
                 onPageChange={this.onPageChange}
+                disabelFollowAc={this.props.disabelFollowAc}
+                disabelFollow={this.props.disabelFollow}
 
             />
         </>
@@ -49,6 +51,7 @@ let mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currenPage: state.usersPage.currenPage,
         isFetching: state.usersPage.isFetching,
+        disabelFollow: state.usersPage.disabelFollow,
     }
 }
 
@@ -78,6 +81,7 @@ export default connect(mapStateToProps,
         followed,
         setCurrenPage,
         isFethcing,
+        disabelFollowAc,
     })(UsersAC)
 
 

@@ -1,10 +1,9 @@
 const FOLLOW = "FOLLOW";
-const UN_FOLLOW = "UN-FOLLOW";
 const GET_USERS = "GET-USERS";
 const SET_CURRENT_PAGE = 'SET-USERS'
 // const SET_TOTAL_USERS_COUNT = "SET-TOTAL-COUNT"
 const TOGGLE_ISFETH = 'TOGGLE-ISFETCH'
-
+const TOGGLE_DISEBEL = "TOGGLE-DISEBEL";
 
 let initialState = {
   users: [],
@@ -12,6 +11,7 @@ let initialState = {
   totalUsersCount: 30,
   currenPage: 1,
   isFetching: false,
+  disabelFollow: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -32,7 +32,6 @@ const usersReducer = (state = initialState, action) => {
           return u;
         }),
       };
-
     case SET_CURRENT_PAGE:
       return {
         ...state,
@@ -44,6 +43,15 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isFetching: action.isFetcing,
       };
+
+    case TOGGLE_DISEBEL: {
+      return {
+        ...state,
+        disabelFollow: action.disabel
+          ? [...state.disabelFollow, action.userId]
+          : state.disabelFollow.filter((id) => id != action.userId),
+      };
+    }
 
     // case SET_TOTAL_USERS_COUNT:
     //   return {
@@ -68,7 +76,7 @@ export const followed = (userId) => {
     type: FOLLOW,
     userId,
   };
-};
+}
 
 export const isFethcing = (isFetcing) => {
   return {
@@ -77,6 +85,13 @@ export const isFethcing = (isFetcing) => {
   };
 };
 
+export const disabelFollowAc = (disabel, userId) => {
+  return {
+    type: TOGGLE_DISEBEL,
+    disabel,
+    userId,
+  };
+};
 
 // export const setTotalCountAC = (totalCount) => {
 //   return {

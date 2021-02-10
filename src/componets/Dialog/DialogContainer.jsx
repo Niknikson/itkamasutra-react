@@ -4,30 +4,10 @@ import { addMessageActionCreator, upDateNewMessageActionCreator } from '../../re
 import { connect } from 'react-redux';
 
 
-// const DialogContainer = () => {
-//     return <StoreContext.Consumer>
-//             { (store) => {
-//                 let state = store.getState().dialogState
-//                 let addMessage = () => {
-//                     store.dispatch(addMessageActionCreator())
-//                 }
-//                 let onMessageChange = (text) => {
-//                     store.dispatch(upDateNewMessageActionCreator(text));
-//                 };
-//               return  <Dialog
-//                     addMessage={addMessage}
-//                     onMessageChange={onMessageChange}
-//                     newMessageText={state.newMessageText}
-//                     messageData={state.messageData}
-//                     dialogsData={state.dialogsData} />
-//             }
-//         }
-//         </StoreContext.Consumer>   
-// }
-
 let mapStateToProps = (state) => {
     return {
-        dialogState: state.dialogState 
+        dialogState: state.dialogState,
+         isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch) => {

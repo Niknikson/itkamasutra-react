@@ -1,3 +1,5 @@
+import { userProfileApi } from '../api/api'
+
 const ADD_POST = "ADD-POST";
 const UP_DATE_NEW_POST_TEXT = "UPDATE-NEW-POST";
 const GET_USER_PROFILE = "GET_USER_PROFILE";
@@ -59,6 +61,18 @@ export const getUserProfile = (profile) => {
     type: GET_USER_PROFILE,
     profile,
   };
+}
+
+export const userProfileThunk = (userId) => {
+  return (dispatch) => {
+    userProfileApi(userId).then((data) => {
+      dispatch(getUserProfile(data))
+    });
+  };
 };
+
+
+
+
 
 export default contentReducer;

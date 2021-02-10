@@ -1,28 +1,10 @@
 import React from 'react';
 import s from './Header.module.css'
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { NavLink } from 'react-router-dom';
+import  useStyles from './styles'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-  appbar: {
-    borderRadius: '10px',
-  },
-}));
 
 const Header = (props) => {
   const classes = useStyles();
@@ -36,12 +18,12 @@ const Header = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-              News
+              React Test
           </Typography>
             <div>
               {props.isAuth ? props.login :
-                <Button color="inherit">
-                  </Button>}
+                <NavLink to='/login'><Button variant="outlined">
+                  Login </Button></NavLink>}
             </div>
         </Toolbar>
       </AppBar>

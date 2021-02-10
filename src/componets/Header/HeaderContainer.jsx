@@ -1,22 +1,14 @@
 import React from 'react'
-import * as axios from 'axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import Header from './Header'
-import { setUserData } from '../../redux/auth-reducer'
-import { authApi } from '../../api/api'
+import { setUserData, unfolowedThunk } from '../../redux/auth-reducer'
+
 
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
-        authApi().then(response => {
-                if (response.resultCode === 0) {       // статус  0 вертається якщо пройшла перевірка авторизаціі і вертаються дані
-                    let {id, email, login} = response.data
-                    this.props.setUserData(id, email, login)
-                    
-                }
-                
-            })
+        this.props.unfolowedThunk()
     }
 
 
@@ -41,4 +33,4 @@ let mapStateToProps = (state) => {
 
 let WithRouteHeader = withRouter(HeaderContainer)
 
-export default connect(mapStateToProps, {setUserData})(WithRouteHeader)
+export default connect(mapStateToProps, { setUserData, unfolowedThunk})(WithRouteHeader)

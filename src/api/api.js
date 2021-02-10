@@ -46,3 +46,9 @@ export const authApi = () => {
       return response.data;
     });
 };
+
+export const userProfileApi = (userId) => {
+  return instance.get(`profile/${userId}`).then((response) => {
+    return response.data;
+  })
+}

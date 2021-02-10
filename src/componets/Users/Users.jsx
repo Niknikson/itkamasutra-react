@@ -2,11 +2,12 @@ import React from 'react'
 import s from './Users.module.css'
 import {Avatar,} from '@material-ui/core'
 import { NavLink } from 'react-router-dom';
-import { unfollowedApi, followedApi } from '../../api/api';
+
+
 
 
 let  Users = (props) => {
-debugger
+
  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
         let pages = []
         for (let i = 1; i <= pagesCount; i++) {
@@ -32,26 +33,10 @@ debugger
                         </div>
                         <div>
                             {u.followed
-                            ? <button disabled={props.disabelFollow.some(id => id === u.id)} onClick={() => {
-                                props.disabelFollowAc(true, u.id) 
-                                unfollowedApi(u.id).then(data => {
-                                        if (data.resultCode === 0) {
-                                            props.followed(u.id)
-                                    }
-                                    props.disabelFollowAc(false, u.id) 
-                                    })
-                               
-                            }} >unFollow</button>
-                            : <button disabled={props.disabelFollow.some(id => id === u.id)} onClick={() => {
-                                props.disabelFollowAc(true, u.id)
-                                followedApi(u.id).then(data => {
-                                    if (data.resultCode === 0) {
-                                        props.followed(u.id)
-                                    }
-                                    props.disabelFollowAc(false, u.id)
-                                })
-                                
-                            }}>Follow</button>}
+                            ? <button disabled={props.disabelFollow.some(id => id === u.id)} onClick={() =>
+                            { props.unfolowed(u.id)}} >unFollow</button>
+                            : <button disabled={props.disabelFollow.some(id => id === u.id)} onClick={() =>
+                            {props.folowedThunk(u.id)}}>Follow</button>}
                         </div>
                     </span>
                     <span>

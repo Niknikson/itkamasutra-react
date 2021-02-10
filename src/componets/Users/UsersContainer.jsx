@@ -1,28 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUsers, followed, setCurrenPage, isFethcing, disabelFollowAc } from '../../redux/users-reducer'
+import {
+    followed, disabelFollowAc, getUsersThunkCreator, getNewPagUserThunk, folowedThunk, unfolowedThunk
+} from '../../redux/users-reducer'
 import Users from './Users'
 import Prelouder from '../../componets/Prelouder/Prelouder'
-import { getUsersApi, resUsersApi } from '../../api/api'
+
 
 class UsersAC extends React.Component {
 
     componentDidMount() {
-        this.props.isFethcing(true)
-
-        getUsersApi(this.props.currenPage, this.props.pageSize).then(response => {
-            this.props.isFethcing(false)
-            this.props.getUsers(response.items)
-        })
+        this.props.getUsersThunkCreator(this.props.currenPage, this.props.pageSize)
     }
 
     onPageChange = (pageNuber) => {
-        this.props.setCurrenPage(pageNuber)
-        this.props.isFethcing(true)
-        resUsersApi(pageNuber, this.props.pageSize).then(response => {
-            this.props.isFethcing(false)
-            this.props.getUsers(response.items)
-        })
+        this.props.getNewPagUserThunk(pageNuber, this.props.pageSize)
+        // this.props.setCurrenPage(pageNuber)
+        // this.props.isFethcing(true)
+        // resUsersApi(pageNuber, this.props.pageSize).then(response => {
+        //     this.props.isFethcing(false)
+        //     this.props.getUsers(response.items)
+        // })
     }
 
 
@@ -34,10 +32,10 @@ class UsersAC extends React.Component {
                 pageSize={this.props.pageSize}
                 currenPage={this.props.currenPage}
                 users={this.props.users}
-                followed={this.props.followed}
                 onPageChange={this.onPageChange}
-                disabelFollowAc={this.props.disabelFollowAc}
                 disabelFollow={this.props.disabelFollow}
+                folowedThunk={this.props.folowedThunk}
+                unfolowed={this.props.unfolowed}
 
             />
         </>
@@ -76,12 +74,13 @@ let mapStateToProps = (state) => {
 // }
 
 export default connect(mapStateToProps,
-    {
-        getUsers,
+    {     
         followed,
-        setCurrenPage,
-        isFethcing,
         disabelFollowAc,
+        getUsersThunkCreator,
+        getNewPagUserThunk,
+        folowedThunk,
+        unfolowed: unfolowedThunk,     //
     })(UsersAC)
 
 

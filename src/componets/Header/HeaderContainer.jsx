@@ -9,9 +9,6 @@ import { authApi } from '../../api/api'
 class HeaderContainer extends React.Component {
 
     componentDidMount() {
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-        //     withCredentials: true
-        // })
         authApi().then(response => {
                 if (response.resultCode === 0) {       // статус  0 вертається якщо пройшла перевірка авторизаціі і вертаються дані
                     let {id, email, login} = response.data

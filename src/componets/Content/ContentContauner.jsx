@@ -2,34 +2,30 @@ import React from 'react'
 import Content from './Content'
 import { connect } from 'react-redux'
 import { userProfileThunk } from '../../redux/content-reducer'
-import { Redirect, withRouter } from 'react-router-dom'
+import {  withRouter } from 'react-router-dom'
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { compose } from 'redux';
+
 
 class ContentContauner extends React.Component {
-
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) { return userId = 2}
-        this.props.userProfileThunk(userId) }
-
-    render() {
-
-        if (!this.props.isAuth) return <Redirect to={'/login'} />
-
+        if (!userId) {
+         userId = 14802
+        }
+        this.props.userProfileThunk(userId)
+         debugger
+    }
+    render() { 
         return (<Content {...this.props} profile={this.props.profile} />
+        )}}
 
-        )
-    }
-}
+let mapStateToProps = (state) => ({
+        profile: state.contentState.profile,   
+})
 
-
-
-let mapStateToProps = (state) => {
-    return {
-        profile: state.contentState.profile,
-        isAuth: state.auth.isAuth 
-    }
-}
-
-let WithRouterContent = withRouter(ContentContauner)
-
-export default connect(mapStateToProps, { userProfileThunk })(WithRouterContent)
+export default compose(connect(mapStateToProps, { userProfileThunk }),
+    withRouter,
+    // withAuthRedirect
+    )(ContentContauner)
+    

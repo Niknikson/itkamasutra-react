@@ -5,14 +5,14 @@ import {
 } from '../../redux/users-reducer'
 import Users from './Users'
 import Prelouder from '../../componets/Prelouder/Prelouder'
+import { compose } from 'redux'
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
 
 class UsersAC extends React.Component {
-
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currenPage, this.props.pageSize)
     }
-
     onPageChange = (pageNuber) => {
         this.props.getNewPagUserThunk(pageNuber, this.props.pageSize)
         // this.props.setCurrenPage(pageNuber)
@@ -22,8 +22,6 @@ class UsersAC extends React.Component {
         //     this.props.getUsers(response.items)
         // })
     }
-
-
     render() {
         return <>
             {this.props.isFetching ? <Prelouder /> : null}
@@ -40,8 +38,7 @@ class UsersAC extends React.Component {
             />
         </>
     }
-}
-
+} 
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
@@ -52,6 +49,31 @@ let mapStateToProps = (state) => {
         disabelFollow: state.usersPage.disabelFollow,
     }
 }
+
+
+
+export default compose(connect(mapStateToProps, {
+         followed,
+         disabelFollowAc,
+         getUsersThunkCreator,
+         getNewPagUserThunk,
+         folowedThunk,
+    unfolowed: unfolowedThunk,
+}),
+    // withAuthRedirect
+)(UsersAC)
+
+    
+
+
+
+
+
+
+
+
+
+
 
 // let mapDispatchToProps = (dispatch) => {
 //     return {
@@ -71,31 +93,19 @@ let mapStateToProps = (state) => {
 //             // dispatch(setTotalCountAC(totalUsers))
 //             //  },
 //     }
-// }
-
-export default connect(mapStateToProps,
-    {     
-        followed,
-        disabelFollowAc,
-        getUsersThunkCreator,
-        getNewPagUserThunk,
-        folowedThunk,
-        unfolowed: unfolowedThunk,     //
-    })(UsersAC)
+// }  or
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+    // connect(mapStateToProps,
+    // {     
+    //     followed,
+    //     disabelFollowAc,
+    //     getUsersThunkCreator,
+    //     getNewPagUserThunk,
+    //     folowedThunk,
+    //     unfolowed: unfolowedThunk,     //
+    // })(UsersAC)
 
 
 

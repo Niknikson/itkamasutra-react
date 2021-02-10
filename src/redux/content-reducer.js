@@ -1,9 +1,8 @@
-import { userProfileApi } from '../api/api'
+import { userProfileApi } from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const UP_DATE_NEW_POST_TEXT = "UPDATE-NEW-POST";
 const GET_USER_PROFILE = "GET_USER_PROFILE";
-
 
 let initialState = {
   newPostText: ["hello"],
@@ -15,7 +14,6 @@ let initialState = {
 };
 
 const contentReducer = (state = initialState, action) => {
-
   switch (action.type) {
     case UP_DATE_NEW_POST_TEXT:
       return {
@@ -41,7 +39,7 @@ const contentReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export const addPostActionCreator = () => {
   return {
@@ -61,18 +59,14 @@ export const getUserProfile = (profile) => {
     type: GET_USER_PROFILE,
     profile,
   };
-}
+};
 
 export const userProfileThunk = (userId) => {
   return (dispatch) => {
     userProfileApi(userId).then((data) => {
-      dispatch(getUserProfile(data))
+      dispatch(getUserProfile(data));
     });
   };
 };
-
-
-
-
 
 export default contentReducer;

@@ -10,7 +10,7 @@ const MyPost = (props) => {
     const classes = useStyles()
 
     let postElement = props.postData.map((p) => <Post message={p.message} key={p.id} lickesCount={p.lickesCount} />)
-
+  
     let newPostElement = React.createRef()
 
     let addPost = () => {
@@ -21,7 +21,7 @@ const MyPost = (props) => {
         let text = newPostElement.current.value;
         props.onPostChange(text);
     }
-
+    
     return (
         <div className={s.myPost}>
             <div>My Post</div>

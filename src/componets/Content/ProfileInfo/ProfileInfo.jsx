@@ -8,10 +8,10 @@ const ProfileInfo = (props) => {
         return <Prelouder/>
     }
     return (
-        <div >
+        <div className={s.marin}>
             { props.profile.fullName}
             <img src={props.profile.photos.small} />
-            Profile!!!!
+           
             <ProfileStatus status={ 'Hellou'} />
         </div>
 

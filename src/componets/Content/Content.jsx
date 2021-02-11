@@ -7,8 +7,14 @@ const Content = (props) => {
     return (
         <div className={s.content}>
             <div>
-                <ProfileInfo profile={ props.profile}/>
-                <MyPostContainer/>
+                <div className={s.profile}>
+                    <ProfileInfo profile={props.profile} />
+                </div>
+                
+                <div className={s.postcontainer}>
+                    <MyPostContainer />
+                </div>
+               
             </div>
 
         </div>

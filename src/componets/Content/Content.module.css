@@ -1,3 +1,12 @@
 .content{
     background-color:white;
 }
+
+.profile{
+ margin-left: 20px;
+ margin-top: 20px;
+}
+
+.postcontainer{
+    margin-top: 50px;
+}

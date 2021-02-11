@@ -14,7 +14,7 @@ class ContentContauner extends React.Component {
          userId = 14802
         }
         this.props.userProfileThunk(userId)
-         debugger
+        
     }
     render() { 
         return (<Content {...this.props} profile={this.props.profile} />

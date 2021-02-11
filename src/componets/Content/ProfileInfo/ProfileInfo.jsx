@@ -9,10 +9,12 @@ const ProfileInfo = (props) => {
     }
     return (
         <div className={s.marin}>
-            { props.profile.fullName}
-            <img src={props.profile.photos.small} />
            
-            <ProfileStatus status={ 'Hellou'} />
+            <img src={props.profile.photos.small} />
+            <div> {props.profile.fullName}</div>
+            <div></div>
+            
+            <ProfileStatus status={props.status} upDateStatusThunk={props.upDateStatusThunk} />
         </div>
 
     );

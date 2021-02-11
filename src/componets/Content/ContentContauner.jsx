@@ -1,7 +1,7 @@
 import React from 'react'
 import Content from './Content'
 import { connect } from 'react-redux'
-import { userProfileThunk } from '../../redux/content-reducer'
+import { userProfileThunk, getUserStatusThunk, upDateStatusThunk } from '../../redux/content-reducer'
 import {  withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import { compose } from 'redux';
@@ -14,17 +14,21 @@ class ContentContauner extends React.Component {
          userId = 14802
         }
         this.props.userProfileThunk(userId)
+        this.props.getUserStatusThunk(userId)
         
     }
     render() { 
-        return (<Content {...this.props} profile={this.props.profile} />
+        return (<Content {...this.props} profile={this.props.profile} status={this.props.status}
+            upDateStatusThunk={this.props.upDateStatusThunk}
+        />
         )}}
 
 let mapStateToProps = (state) => ({
-        profile: state.contentState.profile,   
+    profile: state.contentState.profile,
+    status: state.contentState.status,
 })
 
-export default compose(connect(mapStateToProps, { userProfileThunk }),
+export default compose(connect(mapStateToProps, { userProfileThunk, getUserStatusThunk, upDateStatusThunk }),
     withRouter,
     // withAuthRedirect
     )(ContentContauner)

@@ -3,10 +3,13 @@ import s from './ProfileInfo.module.css';
 
 
 class ProfileStatus extends React.Component {
+
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
+ 
     acitvate = () => {
         this.setState({
             editMode: true
@@ -17,7 +20,16 @@ class ProfileStatus extends React.Component {
         this.setState({
             editMode: false
         })
+       // this.props.upDateStatusThunk(this.state.status)
     }
+
+    onStatusChanch = (e) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
+
+    }
+ 
 
     render() {
 
@@ -25,12 +37,12 @@ class ProfileStatus extends React.Component {
             <>
                 <div>
                     {!this.state.editMode &&
-                        <span onDoubleClick={this.acitvate}> {this.props.status}</span>
+                        <span onDoubleClick={this.acitvate}> {this.props.status || '-----'}</span>
                     }   
                 </div>
                 <div >
                     {this.state.editMode &&
-                        <input autoFocus={true} onBlur={this.deAcitvate} className={s.input} value={this.props.status} type="text" />
+                        <input  onChange={this.onStatusChanch} autoFocus={true} onBlur={this.deAcitvate} className={s.input} value={this.state.status} type="text" />
                     }
                     
                 </div>

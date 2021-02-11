@@ -8,7 +8,11 @@ const Content = (props) => {
         <div className={s.content}>
             <div>
                 <div className={s.profile}>
-                    <ProfileInfo profile={props.profile} />
+                    <ProfileInfo
+                        profile={props.profile}
+                        status={props.status}
+                        upDateStatusThunk={props.upDateStatusThunk}
+                    />
                 </div>
                 
                 <div className={s.postcontainer}>

@@ -4,7 +4,7 @@ const ADD_POST = "ADD-POST";
 const UP_DATE_NEW_POST_TEXT = "UPDATE-NEW-POST";
 const GET_USER_PROFILE = "GET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
-const UP_DATE_STATUS = "UP_DATE_STATUS";
+// const UP_DATE_STATUS = "UP_DATE_STATUS";
 
 let initialState = {
   newPostText: ["hello"],
@@ -44,11 +44,11 @@ const contentReducer = (state = initialState, action) => {
         status: action.status,
       };
 
-    case UP_DATE_STATUS:
-      return {
-        ...state,
-        status: action.status,
-      };
+    // case UP_DATE_STATUS:
+    //   return {
+    //     ...state,
+    //     status: action.status,
+    //   };
       
 
     default:
@@ -82,12 +82,12 @@ export const getUserProfile = (profile) => {
     profile,
   };
 };
-export const upDateStatusAc = (status) => {
-  return {
-    type: UP_DATE_STATUS,
-    status,
-  };
-};
+// export const upDateStatusAc = (status) => {
+//   return {
+//     type: UP_DATE_STATUS,
+//     status,
+//   };
+// };
 
 export const userProfileThunk = (userId) => {
   return (dispatch) => {
@@ -108,8 +108,8 @@ export const getUserStatusThunk = (userId) => {
 export const upDateStatusThunk = (status) => {
   return (dispatch) => {
     profileApi.upDateStutus(status).then((data) => {
-      if (data.resultCode === 0) {
-        dispatch(upDateStatusAc(status));
+      if (data.resultCode === 0) {                      ///////// debugger
+        dispatch(getStatusAc(status));
       }
     });
   };

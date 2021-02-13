@@ -1,13 +1,12 @@
 import { userProfileApi, profileApi } from "../api/api";
 
 const ADD_POST = "ADD-POST";
-const UP_DATE_NEW_POST_TEXT = "UPDATE-NEW-POST";
+// const UP_DATE_NEW_POST_TEXT = "UPDATE-NEW-POST";
 const GET_USER_PROFILE = "GET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 // const UP_DATE_STATUS = "UP_DATE_STATUS";
 
 let initialState = {
-  newPostText: ["hello"],
   profile: null,
   status: "",
   postData: [
@@ -18,21 +17,20 @@ let initialState = {
 
 const contentReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UP_DATE_NEW_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText,
-      };
+    // case UP_DATE_NEW_POST_TEXT:
+    //   return {
+    //     ...state,
+    //     newPostText: action.newText,
+    //   };
     case GET_USER_PROFILE:
       return {
         ...state,
         profile: action.profile,
       };
     case ADD_POST:
-      let newText = state.newPostText;
+      let newText = action.newPostBody;
       return {
         ...state,
-        newPostText: "",
         postData: [
           ...state.postData,
           { id: 3, message: newText, lickesCount: 100 },
@@ -43,13 +41,6 @@ const contentReducer = (state = initialState, action) => {
         ...state,
         status: action.status,
       };
-
-    // case UP_DATE_STATUS:
-    //   return {
-    //     ...state,
-    //     status: action.status,
-    //   };
-      
 
     default:
       return state;
@@ -63,18 +54,19 @@ export const getStatusAc = (status) => {
   };
 };
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPostBody) => {
   return {
     type: ADD_POST,
+    newPostBody,
   };
 };
 
-export const upDateNewPostActionCreator = (text) => {
-  return {
-    type: UP_DATE_NEW_POST_TEXT,
-    newText: text,
-  };
-};
+// export const upDateNewPostActionCreator = (text) => {
+//   return {
+//     type: UP_DATE_NEW_POST_TEXT,
+//     newText: text,
+//   };
+// };
 
 export const getUserProfile = (profile) => {
   return {
@@ -82,12 +74,6 @@ export const getUserProfile = (profile) => {
     profile,
   };
 };
-// export const upDateStatusAc = (status) => {
-//   return {
-//     type: UP_DATE_STATUS,
-//     status,
-//   };
-// };
 
 export const userProfileThunk = (userId) => {
   return (dispatch) => {
@@ -108,8 +94,8 @@ export const getUserStatusThunk = (userId) => {
 export const upDateStatusThunk = (status) => {
   return (dispatch) => {
     profileApi.upDateStutus(status).then((data) => {
-      if (data.resultCode === 0) {                      ///////// debugger
-        dispatch(getStatusAc(status));
+      if (data.data.resultCode === 0) {                      ///////// debugger
+        dispatch(getStatusAc(status))
       }
     });
   };

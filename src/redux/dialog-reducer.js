@@ -1,8 +1,7 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UP_DATE_NEW_MESSAGE = "UP-DATE-NEW-MESSAG";
+//const UP_DATE_NEW_MESSAGE = "UP-DATE-NEW-MESSAG";
 
 let initialState =  {
-      newMessageText: [""],
       dialogsData: [
         { id: 1, name: "Nick" },
         { id: 2, name: "Kris" },
@@ -19,36 +18,38 @@ let initialState =  {
 const dialogsReducer = (state = initialState, action) => {
  
   switch (action.type) {
-
-    case UP_DATE_NEW_MESSAGE:
+    // case UP_DATE_NEW_MESSAGE:
+    //   return {
+    //     ...state,
+    //     newMessageText: action.newMText,
+    //   };
+    case ADD_MESSAGE:
+      //let newMText = action.message
       return {
         ...state,
-        newMessageText: action.newMText,
-      }
-    case ADD_MESSAGE:
-      let newMText = state.newMessageText
-      return{
-        ...state,
-        newMessageText: "",
-        messageData: [...state.messageData, { id: 5, message: newMText }],
+        messageData: [
+          ...state.messageData,
+          { id: 5, message: action.neMessageBody },
+        ],
       };
 
     default:
       return state;
   }
 }
-export const addMessageActionCreator = () => {
+export const addMessageActionCreator = (neMessageBody) => {
   return {
     type: ADD_MESSAGE,
+    neMessageBody,
   };
 };
 
-export const upDateNewMessageActionCreator = (text) => {
-  return {
-    type: UP_DATE_NEW_MESSAGE,
-    newMText: text,
-  };
-};
+// export const upDateNewMessageActionCreator = (text) => {
+//   return {
+//     type: UP_DATE_NEW_MESSAGE,
+//     newMText: text,
+//   };
+// };
 
 
 export default dialogsReducer;

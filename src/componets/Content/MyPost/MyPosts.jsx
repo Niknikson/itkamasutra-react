@@ -1,10 +1,13 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { maxLenghtCreator, required } from '../../../utils/validators/validators';
+import { Textarea } from '../../Prelouder/FormsControls/FormsControls';
 import s from './MyPost.module.css';
 import Post from './Post/Post';
-import Button from '@material-ui/core/Button';
-import useStyles  from "./styles";
-import { Field, reduxForm } from 'redux-form';
+import useStyles from "./styles";
 
+
+const maxLength10 = maxLenghtCreator(10)
 
 const MyPost = (props) => {
     const classes = useStyles()
@@ -48,7 +51,7 @@ const AddPostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} >
             <div>
-                <Field component={'textarea'} name={'newPostBody'} placeholder={'Typ your post'} />
+                <Field validate={[required, maxLength10]} component={Textarea} name={'newPostBody'} placeholder={'Typ your post'} />
             </div>
             <div>
                 <button>Add</button>

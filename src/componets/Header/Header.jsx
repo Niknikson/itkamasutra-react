@@ -21,7 +21,12 @@ const Header = (props) => {
               React Test
           </Typography>
             <div>
-              {props.isAuth ? props.login :
+              {props.isAuth ?
+                <div>
+                  <Button size="small" variant="outlined">{props.login} </Button>
+                  <Button size="small" variant="outlined" onClick={props.logoutThunk} >Logout </Button>
+                </div>
+                  :
                 <NavLink to='/login'><Button variant="outlined">
                   Login </Button></NavLink>}
             </div>

@@ -1,4 +1,4 @@
-import { authApi } from "../api/api";
+import { AuthApi } from "../api/api";
 
 const SET_USERS_DATA = "SET_USERS_DATA";
 
@@ -15,32 +15,54 @@ const authReduser = (state = initialState, action) => {
     case SET_USERS_DATA:
       return {
         ...state,
-          ...action.data,
-        isAuth: true,
+        ...action.payload,
+       
       };
     default:
       return state;
   }
 };
-export const setUserData = (userId, email , login) => {
+export const setUserData = (userId, email , login, isAuth) => {
   return {
-      type: SET_USERS_DATA,
-    data: {userId, email, login}
+    type: SET_USERS_DATA,
+    payload: { userId, email, login, isAuth },
   };
 };
 
 export const unfolowedThunk = () => {
   return (dispatch) => {
-    authApi().then((response) => {
-      if (response.resultCode === 0) {     // статус  0 вертається якщо пройшла перевірка авторизаціі і вертаються дані
-        let { id, email, login } = response.data
-       dispatch(setUserData(id, email, login));
+    AuthApi.me().then((response) => {
+      if (response.resultCode === 0) {
+        // статус  0 вертається якщо пройшла перевірка авторизаціі і вертаються дані
+        let { id, email, login } = response.data;
+        dispatch(setUserData(id, email, login, true));
+      }
+    });
+  };
+};
+
+export const loginThunk = (email, password, rememberMe) => { 
+  return (dispatch) => {
+    AuthApi.login(email, password, rememberMe).then((response) => {
+      if (response.resultCode === 0) { 
+        dispatch(unfolowedThunk());
       }
     });
   };
 };
 
 
+
+export const logoutThunk = () => {
+  return (dispatch) => {
+    AuthApi.logout().then((response) => {
+      debugger
+      if (response.resultCode === 0) {
+       dispatch(setUserData(null, null, null, false));
+      }
+    });
+  };
+};
 
 
 

@@ -6,8 +6,10 @@ import Button from '@material-ui/core/Button';
 import useStyles from './styles'
 import { Redirect } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { Textarea } from '../Prelouder/FormsControls/FormsControls';
+import { maxLenghtCreator, required } from '../../utils/validators/validators';
 
-
+const maxLength20 = maxLenghtCreator(20)
 
 const Dialog = (props) => {
     
@@ -52,7 +54,7 @@ const AddMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} >
             <div  >
-                <Field  component={'textarea'} name={'neMessageBody'} placeholder={'Typ your message'} />
+                <Field validate={[required, maxLength20]} component={Textarea} name={'neMessageBody'} placeholder={'Typ your message'} />
             </div>
             <div>
                 <button>Send</button>

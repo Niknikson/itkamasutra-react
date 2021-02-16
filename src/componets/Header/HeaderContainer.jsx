@@ -5,9 +5,7 @@ import Header from './Header'
 import { logoutThunk, setUserData, unfolowedThunk } from '../../redux/auth-reducer'
 
 class HeaderContainer extends React.Component {
-    componentDidMount() {
-        this.props.unfolowedThunk()
-    }
+   
     render() {
         return (<Header {...this.props} logoutThunk={this.props.logoutThunk} />
         )
@@ -23,4 +21,4 @@ let mapStateToProps = (state) => {
 
 let WithRouteHeader = withRouter(HeaderContainer)
 
-export default connect(mapStateToProps, { setUserData, unfolowedThunk, logoutThunk})(WithRouteHeader)
+export default connect(mapStateToProps, { setUserData, logoutThunk})(WithRouteHeader)

@@ -10,8 +10,8 @@ import { compose } from 'redux';
 class ContentContauner extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) {
-         userId = 14802
+        if (!userId && this.props.isAuth === true ) {
+            userId = this.props.userId
         }
         this.props.userProfileThunk(userId)
         this.props.getUserStatusThunk(userId)
@@ -26,6 +26,8 @@ class ContentContauner extends React.Component {
 let mapStateToProps = (state) => ({
     profile: state.contentState.profile,
     status: state.contentState.status,
+    userId: state.auth.userId,
+    isAuth: state.auth.isAuth,
 })
 
 export default compose(connect(mapStateToProps, { userProfileThunk, getUserStatusThunk, upDateStatusThunk }),

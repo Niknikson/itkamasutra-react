@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { AuthApi } from "../api/api";
 
 const SET_USERS_DATA = "SET_USERS_DATA";
@@ -29,9 +30,9 @@ export const setUserData = (userId, email , login, isAuth) => {
   };
 };
 
-export const unfolowedThunk = () => {
+export const meThunk = () => {
   return (dispatch) => {
-    AuthApi.me().then((response) => {
+    return AuthApi.me().then((response) => {
       if (response.resultCode === 0) {
         // статус  0 вертається якщо пройшла перевірка авторизаціі і вертаються дані
         let { id, email, login } = response.data;
@@ -45,7 +46,10 @@ export const loginThunk = (email, password, rememberMe) => {
   return (dispatch) => {
     AuthApi.login(email, password, rememberMe).then((response) => {
       if (response.resultCode === 0) { 
-        dispatch(unfolowedThunk());
+        dispatch(meThunk());
+      } else {
+        let message = response.messages.length > 0 ? response.messages[0] : 'Some error'
+        dispatch(stopSubmit("login", { _error: message }));
       }
     });
   };

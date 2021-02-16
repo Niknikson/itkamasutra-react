@@ -23,7 +23,7 @@ const Header = (props) => {
             <div>
               {props.isAuth ?
                 <div>
-                  <Button size="small" variant="outlined">{props.login} </Button>
+                  <Button color="secondary" size="small" disabled>{props.login} </Button>
                   <Button size="small" variant="outlined" onClick={props.logoutThunk} >Logout </Button>
                 </div>
                   :

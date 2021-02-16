@@ -1,8 +1,9 @@
 import React from 'react'
+import s from './login.module.css'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Field, reduxForm } from 'redux-form'
-import { logoutThunk, loginThunk } from '../../../redux/auth-reducer'
+import {  loginThunk } from '../../../redux/auth-reducer'
 import { maxLenghtCreator, required } from '../../../utils/validators/validators'
 import { Input } from '../../Prelouder/FormsControls/FormsControls'
 
@@ -20,6 +21,8 @@ const LoginForm = (props) => {
             <div>
                 <Field type={'checkbox'} name={'remamberMe'} component={Input} validate={[required, maxLength30]}/> Remeber me
             </div>
+            {props.error && <div  className={s.login} >{props.error}</div>}
+            
             <div>
                 <button>Login</button>
             </div>

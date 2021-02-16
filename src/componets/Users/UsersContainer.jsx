@@ -7,6 +7,7 @@ import Users from './Users'
 import Prelouder from '../../componets/Prelouder/Prelouder'
 import { compose } from 'redux'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { getUsers, getPageSize, getDisabelFollow, getIsFetching, getCurrenPage, getTotalUsersCount  } from '../../redux/users-selectors'
 
 
 class UsersAC extends React.Component {
@@ -41,12 +42,12 @@ class UsersAC extends React.Component {
 } 
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currenPage: state.usersPage.currenPage,
-        isFetching: state.usersPage.isFetching,
-        disabelFollow: state.usersPage.disabelFollow,
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currenPage: getCurrenPage(state),
+        isFetching: getIsFetching(state),
+        disabelFollow: getDisabelFollow(state),
     }
 }
 
